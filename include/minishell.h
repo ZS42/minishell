@@ -6,7 +6,7 @@
 /*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/26 18:06:41 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:31:07 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_shell
 	t_list_cmd	**cmd_list;
 	int			size;
 	int			*oper;
+	int			**fd;
 	int			nbr_pipes;
 	int			*pid;
 }	t_shell;
@@ -122,6 +123,7 @@ void		parse_line(t_shell *shell, char *line);
 
 int			syntax_error(t_elem *head, t_elem *elem);
 void		nosuch_error(char *str, int exitcode, t_shell *shell);
+void		nosuch_error1(char *str, int exitcode);
 void		perm_error(int exit_code, t_shell *shell);
 
 void		free_elem(t_elem *head);
@@ -168,17 +170,16 @@ char		*ft_expand_here_doc(t_shell *shell, char array[999998]);
 
 void		execute(t_shell *shell, t_list_cmd *cmd_list);
 int			**open_pipes(t_shell *shell);
-void		ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid, int **fd);
-void		ft_dupe_pipes(t_shell *shell, int i, int **fd);
-void		child_process(t_shell *shell, t_list_cmd *cmd_list, int **fd);
+void		ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid);
+void		ft_dupe_pipes(t_shell *shell, int i);
+void		child_process(t_shell *shell, t_list_cmd *cmd_list);
 void		exec_rdr(t_shell *shell, t_list_rdr *ptr);
 void		exec_rdr1(t_shell *shell, t_list_cmd *cmd_list);
 void		exec_in(t_list_rdr *rdr, t_shell *shell);
 void		exec_out(t_list_rdr *rdr, t_shell *shell);
 void		exec_here_doc(t_list_rdr *rdr, t_shell *shell);
 void		error_pipe(char **cmd, t_shell *shell);
-void		close_fds(t_shell *shell, int **fd);
-void		close_fds_parent(t_shell *shell, int **fd);
+void		close_fds(t_shell *shell);
 void		ft_wait(int *pid, int nbr_pipes);
 
 void		print_list(t_list_cmd *cmd_list);

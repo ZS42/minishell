@@ -6,7 +6,7 @@
 /*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 17:40:10 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/26 18:00:55 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:29:11 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ void	ft_wait(int *pid, int nbr_pipes)
 	}
 }
 
-void	close_fds(t_shell *shell, int **fd)
+void	close_fds(t_shell *shell)
 {
 	int	j;
 
 	j = 0;
 	while (j < shell->nbr_pipes)
 	{
-		close(fd[j][0]);
-		close(fd[j][1]);
+		close(shell->fd[j][0]);
+		close(shell->fd[j][1]);
 		j++;
 	}
 }
 
-void	ex_loop(t_shell *shell, t_list_cmd *ptr, int **fd)
+void	ex_loop(t_shell *shell, t_list_cmd *ptr)
 {
 	int	i;
 
@@ -67,7 +67,7 @@ void	ex_loop(t_shell *shell, t_list_cmd *ptr, int **fd)
 				&& !ptr->rdr && !ptr->next)
 				ft_builtins_parent(shell, ptr);
 			else if (ptr->cmd != NULL)
-				ft_fork(shell, ptr, shell->pid, fd);
+				ft_fork(shell, ptr, shell->pid);
 		}
 		else if (ptr->rdr)
 			exec_rdr(shell, ptr->rdr);
@@ -84,11 +84,10 @@ void	execute(t_shell *shell, t_list_cmd *ptr)
 	fd = NULL;
 	if (shell->nbr_pipes > 0)
 		fd = open_pipes(shell);
-	ex_loop(shell, ptr, fd);
-	close_fds(shell, fd);
+	ex_loop(shell, ptr);
+	close_fds(shell);
 	ft_wait(shell->pid, shell->nbr_pipes);
 	signal(SIGINT, handle_sig);
 	clean_shell(shell);
-	ft_free_2d_int(fd, shell->nbr_pipes);
 	unlink("here_doc");
 }
