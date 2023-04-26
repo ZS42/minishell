@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:16:27 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/25 17:49:59 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:08:56 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,17 @@ int	syntax_error(t_elem *head, t_elem *elem)
 	return (0);
 }
 
-void	nosuch_error(char *str, int exitcode)
+void	nosuch_error(char *str, int exitcode, t_shell *shell)
+{
+	ft_putstr_fd("ruhan_zahra_shell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": No such file or directory", 2);
+	g_exit_status = exitcode;
+	free_shell(shell);
+	exit(g_exit_status);
+}
+
+void	nosuch_error1(char *str, int exitcode)
 {
 	ft_putstr_fd("ruhan_zahra_shell: ", 2);
 	ft_putstr_fd(str, 2);
@@ -31,10 +41,11 @@ void	nosuch_error(char *str, int exitcode)
 	exit(g_exit_status);
 }
 
-void	perm_error(int exit_code)
+void	perm_error(int exit_code, t_shell *shell)
 {
 	ft_putstr_fd("ruhan_zahra_shell:", 2);
 	ft_putstr_fd(" Permission denied", 2);
 	g_exit_status = exit_code;
+	free_shell(shell);
 	exit (g_exit_status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:02:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/25 17:53:46 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:05:39 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	**open_pipes(t_shell *shell)
 	i = -1;
 	while (++i < shell->nbr_pipes)
 		if (pipe (fd[i]) == -1 || fd[i][0] == -1 || fd[i][1] == -1)
-			error(fd[i]);
+			error(fd[i], shell);
 	return (fd);
 }
 
@@ -41,14 +41,14 @@ void	ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid, int **fd)
 {
 	pid[cmd_list->cmd_nbr] = fork();
 	if (pid[cmd_list->cmd_nbr] == -1)
-		error_pipe(cmd_list->cmd);
+		error_pipe(cmd_list->cmd, shell);
 	if (pid[cmd_list->cmd_nbr] == 0)
 		child_process(shell, cmd_list, fd);
 	else
 		signal(SIGINT, SIG_IGN);
 }
 
-void	handle_error(t_list_cmd *cmd_list)
+void	handle_error(t_list_cmd *cmd_list, t_shell *shell)
 {
 	struct stat	info;
 
@@ -58,9 +58,9 @@ void	handle_error(t_list_cmd *cmd_list)
 	if (access(cmd_list->cmd[0], X_OK) == -1)
 	{
 		if (access(cmd_list->cmd[0], F_OK) == -1)
-			nosuch_error(cmd_list->cmd[0], 127);
+			nosuch_error(cmd_list->cmd[0], 127, shell);
 		else
-			perm_error(126);
+			perm_error(126, shell);
 	}
 	else if (S_ISDIR(info.st_mode))
 	{
@@ -70,7 +70,8 @@ void	handle_error(t_list_cmd *cmd_list)
 		g_exit_status = 126;
 	}
 	else
-		nosuch_error(cmd_list->cmd[0], 1);
+		nosuch_error(cmd_list->cmd[0], 1, shell);
+	free_shell(shell);
 	exit(g_exit_status);
 }
 
@@ -87,7 +88,7 @@ void	child_process(t_shell *shell, t_list_cmd *cmd_list, int **fd)
 	else if (cmd_list->path != NULL && cmd_list->cmd != NULL)
 	{
 		if (execve(cmd_list->path, cmd_list->cmd, shell->env) == -1)
-			handle_error(cmd_list);
+			handle_error(cmd_list, shell);
 	}
 	else if (!cmd_list->path && cmd_list->cmd)
 	{

@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 17:40:10 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/25 17:55:37 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:00:55 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	error_pipe(char **cmd)
+void	error_pipe(char **cmd, t_shell *shell)
 {
 	ft_putstr_fd("ruhan_zahra_shell: ", 2);
 	ft_putstr_fd(cmd[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
 	g_exit_status = 127;
+	free_shell(shell);
 	exit (127);
 }
 

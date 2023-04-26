@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/25 17:53:40 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:06:41 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ void		convert(t_shell *shell, t_elem *head);
 void		parse_line(t_shell *shell, char *line);
 
 int			syntax_error(t_elem *head, t_elem *elem);
-void		nosuch_error(char *str, int exitcode);
-void		perm_error(int exit_code);
+void		nosuch_error(char *str, int exitcode, t_shell *shell);
+void		perm_error(int exit_code, t_shell *shell);
 
 void		free_elem(t_elem *head);
 void		free_rdr(t_list_rdr *rdr);
@@ -173,10 +173,10 @@ void		ft_dupe_pipes(t_shell *shell, int i, int **fd);
 void		child_process(t_shell *shell, t_list_cmd *cmd_list, int **fd);
 void		exec_rdr(t_shell *shell, t_list_rdr *ptr);
 void		exec_rdr1(t_shell *shell, t_list_cmd *cmd_list);
-void		exec_in(t_list_rdr *rdr);
-void		exec_out(t_list_rdr *rdr);
+void		exec_in(t_list_rdr *rdr, t_shell *shell);
+void		exec_out(t_list_rdr *rdr, t_shell *shell);
 void		exec_here_doc(t_list_rdr *rdr, t_shell *shell);
-void		error_pipe(char **cmd);
+void		error_pipe(char **cmd, t_shell *shell);
 void		close_fds(t_shell *shell, int **fd);
 void		close_fds_parent(t_shell *shell, int **fd);
 void		ft_wait(int *pid, int nbr_pipes);
@@ -194,7 +194,7 @@ void		ft_free_2d_int(int **s, int i);
 char		**ft_cpy_2d(char **s);
 char		**remove_from2d(char **cmd, int i);
 void		sort_2d_array(char **s);
-int			error(int *fd);
+int			error(int *fd, t_shell *shell);
 int			ft_putnbr(int n);
 
 #endif

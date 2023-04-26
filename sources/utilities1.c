@@ -6,7 +6,7 @@
 /*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:31:38 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/24 17:24:47 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/26 17:59:41 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ void	sort_2d_array(char **strs)
 	}
 }
 
-int	error(int *fd)
+int	error(int *fd, t_shell *shell)
 {
 	close (fd[0]);
 	close (fd[1]);
 	printf("ERROR: %s\n", strerror(errno));
+	free(shell);
 	exit (0);
 }
 
