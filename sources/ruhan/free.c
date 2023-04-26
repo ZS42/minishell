@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:05:05 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/23 17:36:20 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/26 19:09:52 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	clean_shell(t_shell *shell)
 {
 	int	i;
 
+	if (shell->fd)
+		ft_free_2d_int(shell->fd, shell->nbr_pipes);
 	if (shell->cmd_list)
 	{
 		i = -1;
@@ -78,6 +80,7 @@ void	clean_shell(t_shell *shell)
 	shell->cmd_list = NULL;
 	shell->oper = NULL;
 	shell->pid = NULL;
+	shell->fd = NULL;
 	shell->nbr_pipes = 0;
 	shell->size = 0;
 }

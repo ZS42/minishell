@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:44:27 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/25 17:23:47 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/26 19:12:46 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	check_valid(char *line)
 			return (0);
 		}
 	}
+	free(var);
 	return (1);
 }
 

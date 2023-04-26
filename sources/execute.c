@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 17:40:10 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/26 18:29:11 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/26 19:08:07 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,9 @@ void	ex_loop(t_shell *shell, t_list_cmd *ptr)
 
 void	execute(t_shell *shell, t_list_cmd *ptr)
 {
-	int			**fd;
-
 	shell->pid = (int *)ft_calloc(shell->nbr_pipes + 1, sizeof(int));
-	fd = NULL;
 	if (shell->nbr_pipes > 0)
-		fd = open_pipes(shell);
+		shell->fd = open_pipes(shell);
 	ex_loop(shell, ptr);
 	close_fds(shell);
 	ft_wait(shell->pid, shell->nbr_pipes);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:02:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/26 18:28:12 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/26 19:17:47 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ void	handle_error(t_list_cmd *cmd_list, t_shell *shell)
 	}
 	else
 		nosuch_error(cmd_list->cmd[0], 1, shell);
-	free_shell(shell);
-	exit(g_exit_status);
 }
 
 void	child_process(t_shell *shell, t_list_cmd *cmd_list)
@@ -97,5 +95,6 @@ void	child_process(t_shell *shell, t_list_cmd *cmd_list)
 		ft_putstr_fd(": command not found\n", 2);
 		g_exit_status = 127;
 	}
+	free_shell(shell);
 	exit(g_exit_status);
 }

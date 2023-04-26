@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 13:58:15 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/25 17:23:19 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/26 19:21:08 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void	ft_builtins_child(t_shell *shell, t_list_cmd *cmd_list)
 		ft_pwd();
 	if (ft_strncmp(cmd_list->cmd[0], "env", 4) == 0)
 		ft_env(shell);
+	free_shell(shell);
 	exit (g_exit_status);
 }
