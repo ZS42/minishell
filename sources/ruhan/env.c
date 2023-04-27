@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 16:05:58 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/22 13:37:27 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:21:09 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,25 @@ int	lenofenv(char *str)
 	while (ft_isalnum(str[i]))
 		i++;
 	return (i);
+}
+
+char	*ft_getenv(t_shell *shell, char *var)
+{
+	int	i;
+	int	len;
+
+	if (!var || !shell || !shell->env)
+		return (NULL);
+	if (!var[0])
+		return (ft_strdup_ft("$"));
+	if (var[0] == '?' && var[1] == '\0')
+		return (ft_itoa(g_exit_status));
+	len = ft_strlen(var);
+	i = -1;
+	while (shell->env[++i])
+		if (!ft_strncmp(shell->env[i], var, len) && shell->env[i][len] == '=')
+			return (ft_strdup_ft(&shell->env[i][len + 1]));
+	return (NULL);
 }
 
 void	sub_env(t_shell *shell, t_elem *elem)
