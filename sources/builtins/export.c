@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 17:15:13 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 18:25:48 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:47:36 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	add_to_env(t_shell *shell, char *line)
 	new = ft_calloc(sizeof(char *), len + 2);
 	len = -1;
 	while (shell->env[++len])
-		new[len] = ft_strdup_ft(shell->env[len]);
-	new[len] = ft_strdup_ft(line);
+		new[len] = ft_strdup(shell->env[len]);
+	new[len] = ft_strdup(line);
 	new[len + 1] = NULL;
 	ft_free_2d(shell->env);
 	shell->env = new;
@@ -77,7 +77,7 @@ void	env_update(t_shell *shell, char *line)
 	{
 		if (shell->env[i])
 			free(shell->env[i]);
-		shell->env[i] = ft_strdup_ft(line);
+		shell->env[i] = ft_strdup(line);
 	}
 	else if (i == -1)
 		add_to_env(shell, line);

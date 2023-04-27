@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:56:06 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/26 18:22:11 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:47:36 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**parse_elem(t_elem *head)
 			strs[i] = NULL;
 		else
 		{
-			strs[i] = ft_strdup_ft(head->content);
+			strs[i] = ft_strdup(head->content);
 			head = head->next;
 		}
 	}
@@ -55,7 +55,7 @@ t_list_cmd	*make_cmd(t_shell *shell, t_elem *head, t_list_cmd *prev)
 		free(temp);
 	}
 	else if (head->content[0] == '/')
-		cmd->path = ft_strdup_ft(head->content);
+		cmd->path = ft_strdup(head->content);
 	else if (cmd->cmd && !check_builtins(cmd->cmd[0]))
 		cmd->path = path(shell, cmd->cmd[0]);
 	else

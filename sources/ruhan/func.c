@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:10:52 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/27 19:21:04 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:47:36 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char	*ft_null_strjoin(char *s1, char *s2)
 	if (s1 == NULL && s2 == NULL)
 		return (NULL);
 	if (s1 == NULL)
-		return (ft_strdup_ft(s2));
+		return (ft_strdup(s2));
 	if (s2 == NULL)
-		return (ft_strdup_ft(s1));
+		return (ft_strdup(s1));
 	c1 = ft_strlen(s1);
 	c2 = ft_strlen(s2);
 	a = (char *)malloc(sizeof(char) * (c1 + c2) + 1);

@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:12:09 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 17:12:30 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:44:56 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_shlvl(t_shell *shell, int add)
 			free(value);
 			value = ft_itoa(lvl);
 			free (shell->env[i]);
-			shell->env[i] = ft_strjoin_ft("SHLVL=", value);
+			shell->env[i] = ft_strjoin("SHLVL=", value);
 			free(value);
 		}
 	}

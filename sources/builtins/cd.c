@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:02:04 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/25 18:16:31 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:44:56 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_change_env(t_shell *shell, char *var, char *value)
 			&& (!shell->env[i][len] || shell->env[i][len] == '='))
 		{
 			free(shell->env[i]);
-			shell->env[i] = ft_strjoin_ft(var, value);
+			shell->env[i] = ft_strjoin(var, value);
 		}
 		i++;
 	}
@@ -60,7 +60,7 @@ void	call_tilde(t_shell *shell, char *cmd)
 	char	*join;
 
 	str = ft_getenv(shell, "HOME");
-	join = ft_strjoin_ft(str, &cmd[1]);
+	join = ft_strjoin(str, &cmd[1]);
 	free(str);
 	if (chdir(join) != 0)
 		cd_error(join);

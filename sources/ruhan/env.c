@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 16:05:58 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/27 18:21:09 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:47:36 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ char	*ft_getenv(t_shell *shell, char *var)
 	if (!var || !shell || !shell->env)
 		return (NULL);
 	if (!var[0])
-		return (ft_strdup_ft("$"));
+		return (ft_strdup("$"));
 	if (var[0] == '?' && var[1] == '\0')
 		return (ft_itoa(g_exit_status));
 	len = ft_strlen(var);
 	i = -1;
 	while (shell->env[++i])
 		if (!ft_strncmp(shell->env[i], var, len) && shell->env[i][len] == '=')
-			return (ft_strdup_ft(&shell->env[i][len + 1]));
+			return (ft_strdup(&shell->env[i][len + 1]));
 	return (NULL);
 }
 
@@ -68,7 +68,7 @@ void	handle_env(t_shell *shell, char **content, int start)
 	after = ft_strndup(&(*content)[start], sublen);
 	env = ft_getenv(shell, &after[1]);
 	free(after);
-	after = ft_strdup_ft(&(*content)[start + sublen]);
+	after = ft_strdup(&(*content)[start + sublen]);
 	free(*content);
 	*content = ft_null_strjoin(before, env);
 	free(before);

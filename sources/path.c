@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 14:25:13 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 17:16:53 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:47:36 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ char	*check_path(char *cmd, char **paths)
 	i = -1;
 	while (paths[++i])
 	{
-		path = ft_strjoin_ft(paths[i], cmd);
+		path = ft_strjoin(paths[i], cmd);
 		free(paths[i]);
 		paths[i] = path;
 		if (access(paths[i], F_OK) == 0)
-			return (ft_strdup_ft(paths[i]));
+			return (ft_strdup(paths[i]));
 	}
 	return (NULL);
 }
@@ -53,7 +53,7 @@ char	**append_path(t_shell *shell)
 	{
 		if (paths[i][ft_strlen(paths[i]) - 1] != '/')
 		{
-			path = ft_strjoin_ft (paths[i], "/");
+			path = ft_strjoin (paths[i], "/");
 			free(paths[i]);
 			paths[i] = path;
 		}

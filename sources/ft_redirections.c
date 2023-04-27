@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:19:27 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 19:49:10 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:44:56 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_here_doc(t_shell *shell, char *delimiter)
 	int		i;
 
 	herestring = NULL;
-	delimiter = ft_strjoin_ft(delimiter, "\n");
+	delimiter = ft_strjoin(delimiter, "\n");
 	i = dup(STDIN_FILENO);
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 17:16:20 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/23 19:42:31 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:47:36 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_list_rdr	*make_rdr(char *str, int type, t_list_rdr *prev)
 	t_list_rdr	*rdr;
 
 	rdr = malloc(sizeof(t_list_rdr));
-	rdr->file = ft_strdup_ft(str);
+	rdr->file = ft_strdup(str);
 	if (type == '<')
 		rdr->type = RDR_IN;
 	else if (type == '>')

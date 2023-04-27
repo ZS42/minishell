@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 19:21:25 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:44:52 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define PROMPT "\e[34mruhan_zahra_shell\e[0m "
 
-# include "../libft/include/libft.h"
+# include "libft.h"
 
 # include <unistd.h>
 # include <stdlib.h>

@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:29:12 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 18:42:54 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:47:36 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**ft_cpy_2d(char **s)
 		return (NULL);
 	len = -1;
 	while (s[++len])
-		new[len] = ft_strdup_ft(s[len]);
+		new[len] = ft_strdup(s[len]);
 	new[len] = NULL;
 	return (new);
 }
