@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 17:35:47 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:19:52 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ t_elem		*remove_nulls(t_elem *head);
 void		join_words(t_elem *elem);
 t_elem		*remove_spaces(t_elem *head);
 
+char		*ft_getenv(t_shell *shell, char *var);
 int			lenofenv(char *str);
 void		sub_env(t_shell *shell, t_elem *elem);
 void		handle_env(t_shell *shell, char **content, int start);
@@ -133,24 +134,20 @@ void		free_shell(t_shell *shell);
 void		clean_shell(t_shell *shell);
 // END OF RUHAN FUNCTIONS
 
-t_shell		*init_shell(char **envp);
-void		ft_shlvl(t_shell *shell, int add);
-t_list_cmd	**init_cmd_list(t_elem	*head, t_shell *shell, char *s);
 int			count_pipes(t_list_cmd *cmd);
+void		ft_shlvl(t_shell *shell, int add);
+t_shell		*init_shell(char **envp);
 
 void		ft_builtins_child(t_shell *shell, char **cmd);
 void		ft_builtins_parent(t_shell *shell, char **cmd);
 int			check_builtins(char *cmd);
 
-void		ft_exit(t_shell *shell, char **cmd);
-
 void		ft_cd(t_shell *shell, char **cmd);
-
+void		ft_exit(t_shell *shell, char **cmd);
+void		ft_echo(char **cmd);
 void		ft_env(t_shell *shell);
-char		*ft_getenv(t_shell *shell, char *var);
 void		ft_change_env(t_shell *shell, char *var, char *str);
 
-void		ft_echo(char **cmd);
 
 void		ft_pwd(void);
 
@@ -174,7 +171,6 @@ void		ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid);
 void		ft_dupe_pipes(t_shell *shell, int i);
 void		child_process(t_shell *shell, t_list_cmd *cmd_list);
 void		exec_rdr(t_shell *shell, t_list_rdr *ptr);
-void		exec_rdr1(t_shell *shell, t_list_cmd *cmd_list);
 void		exec_in(t_list_rdr *rdr, t_shell *shell);
 void		exec_out(t_list_rdr *rdr, t_shell *shell);
 void		exec_here_doc(t_list_rdr *rdr, t_shell *shell);
