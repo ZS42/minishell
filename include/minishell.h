@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 18:46:57 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 19:21:25 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	g_exit_status;
 // RUHAN FUNCTIONS
 int			is_sep(t_elem *elem);
 char		*ft_null_strjoin(char *s1, char *s2);
+char		*ft_free_strjoin(char *s1, char *s2);
 int			is_in(char *str, char c);
 
 t_elem		*create_elem(char *content, int len, int type, t_elem *prev);

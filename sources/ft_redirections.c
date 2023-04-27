@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:19:27 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 18:59:50 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 19:32:43 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,56 +37,56 @@ void	exec_out(t_list_rdr *rdr, t_shell *shell)
 	dup2(rdr->fd_out, STDOUT_FILENO);
 }
 
-char	*ft_here_doc(t_shell *shell, char *delimiter, char *herestring)
+char	*ft_here_doc(t_shell *shell, char *delimiter)
 {
-	char	*temp;
+	char	*herestring;
+	char	*input;
 	int		i;
-	int		fd;
 
-	temp = "";
+	herestring = NULL;
 	delimiter = ft_strjoin_ft(delimiter, "\n");
-	fd = dup(STDIN_FILENO);
+	i = dup(STDIN_FILENO);
 	while (1)
 	{
-		write (1, "> ", 2);
-		herestring = get_next_line(fd);
-		if (ft_strncmp(herestring, delimiter, ft_strlen(delimiter) + 1) == 0)
+		ft_putstr("> ");
+		input = get_next_line(i);
+		if (!input || !ft_strcmp(input, delimiter))
 			break ;
-		temp = ft_strjoin_ft(temp, herestring);
-		free(herestring);
+		herestring = ft_free_strjoin(herestring, input);
 	}
-	herestring = temp;
+	close(i);
+	if (input)
+		free(input);
+	free(delimiter);
 	i = -1;
 	while (herestring[++i])
 		if (herestring[i] == '$' && lenofenv(&herestring[i]) > 1)
 			handle_env(shell, &herestring, i--);
-	close(fd);
 	return (herestring);
 }
 
 void	exec_here_doc(t_list_rdr *rdr, t_shell *shell)
 {
 	char		*herestring;
-	t_list_rdr	*ptr;
 	t_list_rdr	*next;
 
-	ptr = rdr;
-	herestring = "";
 	rdr->fd_in = open("here_doc", O_CREAT | O_RDWR | O_TRUNC, 0777);
 	if (rdr->fd_in < 0)
-		nosuch_error(ptr->file, 1, shell);
-	herestring = ft_here_doc(shell, ptr->file, herestring);
-	if ((ptr->next && ptr->next->type != RDR_HEREDOC
-			&& ptr->next->type != RDR_IN) || !ptr->next)
+		nosuch_error(rdr->file, 1, shell);
+	herestring = ft_here_doc(shell, rdr->file);
+	if ((rdr->next && rdr->next->type != RDR_HEREDOC
+			&& rdr->next->type != RDR_IN) || !rdr->next)
 		dup2(rdr->fd_in, 0);
-	write(rdr->fd_in, herestring, ft_strlen_ft(herestring));
-	if (!ptr->next || ptr->next->type != RDR_HEREDOC)
-	{
-		next = ptr->next;
-		ptr->next = make_rdr("here_doc", '<', rdr);
-		ptr->next->next = next;
-	}
+	ft_putstr_fd(herestring, rdr->fd_in);
+	free(herestring);
 	close(rdr->fd_in);
+	if (!rdr->next || rdr->next->type != RDR_HEREDOC)
+	{
+		next = rdr->next;
+		rdr->next = make_rdr("here_doc", '<', rdr);
+		rdr->next->next = next;
+	}
+
 }
 
 // for < RDR_IN

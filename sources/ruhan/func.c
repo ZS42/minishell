@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:10:52 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/27 17:32:22 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 19:21:04 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ char	*ft_null_strjoin(char *s1, char *s2)
 		a[c1 + i] = s2[i];
 	a[c1 + c2] = '\0';
 	return (a);
+}
+
+char	*ft_free_strjoin(char *s1, char *s2)
+{
+	char	*new;
+
+	new = ft_null_strjoin(s1, s2);
+	free(s1);
+	free(s2);
+	return (new);
 }
 
 int	is_sep(t_elem *elem)
