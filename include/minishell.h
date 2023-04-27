@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 18:34:57 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:46:57 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,20 @@
 # define PROMPT "\e[34mruhan_zahra_shell\e[0m "
 
 # include "../libft/include/libft.h"
-// for printf
-# include <stdio.h>
-// for PATH_MAX
-# include <limits.h>
-// for malloc
-# include <stdlib.h>
-// for prompt
-# include <readline/readline.h>
-// for history
-# include <readline/history.h>
-// for read , write
+
 # include <unistd.h>
-// for open, close
+# include <stdlib.h>
 # include <fcntl.h>
-// for error
+# include <stdio.h>
+
+# include <readline/readline.h>
+# include <readline/history.h>
+
+# include <limits.h>
 # include <errno.h>
-// for wait amd waitpid
+
 # include <sys/wait.h>
 # include <sys/stat.h>
-// for stderror
-# include <errno.h>
 # include <strings.h>
 # include <signal.h>
 
@@ -54,7 +47,7 @@ enum	e_rdr
 	RDR_HEREDOC = 1,
 	RDR_OUT_TRUNC = 2,
 	RDR_OUT_APPEND = 3,
-}rdr;
+}	rdr;
 
 typedef struct s_list_rdr
 {

@@ -8,6 +8,8 @@
 		"__errc": "c",
 		"__hash_table": "c",
 		"__locale": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"limits.h": "c",
+		"readline.h": "c"
 	}
 }

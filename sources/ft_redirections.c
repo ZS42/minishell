@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:19:27 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 18:29:32 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:59:50 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,16 @@ void	exec_in(t_list_rdr *rdr, t_shell *shell)
 {
 	if (access(rdr->file, F_OK | R_OK) == 0)
 		rdr->fd_in = open(rdr->file, O_RDONLY, 0777);
+	else if (errno == 13)
+		perm_error(13, shell);
 	else
-	{
-		if (errno == 13)
-			perm_error(13, shell);
-		else
-			nosuch_error(rdr->file, 1, shell);
-	}
+		nosuch_error(rdr->file, 1, shell);
 	dup2(rdr->fd_in, STDIN_FILENO);
 }
 
 void	exec_out(t_list_rdr *rdr, t_shell *shell)
 {
-	if (access(rdr->file, F_OK) != 0)
+	if (access(rdr->file, F_OK) || !access(rdr->file, F_OK | W_OK))
 	{
 		if (rdr->type == RDR_OUT_TRUNC)
 			rdr->fd_out = open(rdr->file, O_CREAT | O_WRONLY | O_TRUNC, 0777);
@@ -36,19 +33,7 @@ void	exec_out(t_list_rdr *rdr, t_shell *shell)
 			rdr->fd_out = open(rdr->file, O_CREAT | O_WRONLY | O_APPEND, 0777);
 	}
 	else
-	{
-		if (access(rdr->file, F_OK | W_OK) == 0)
-		{
-			if (rdr->type == RDR_OUT_TRUNC)
-				rdr->fd_out = open(rdr->file, O_CREAT
-						| O_WRONLY | O_TRUNC, 0777);
-			else if (rdr->type == RDR_OUT_APPEND)
-				rdr->fd_out = open(rdr->file, O_CREAT
-						| O_WRONLY | O_APPEND, 0777);
-		}
-		else
-			perm_error(1, shell);
-	}
+		perm_error(1, shell);
 	dup2(rdr->fd_out, STDOUT_FILENO);
 }
 
@@ -108,6 +93,7 @@ void	exec_here_doc(t_list_rdr *rdr, t_shell *shell)
 // for << ptr->type == RDR_HEREDOC
 // for > ptr->type == RDR_OUT_TRUNC
 // for >> RDR_OUT_APPEND
+
 void	exec_rdr(t_shell *shell, t_list_rdr *ptr)
 {
 	while (ptr)
