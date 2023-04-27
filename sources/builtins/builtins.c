@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 13:58:15 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 17:04:30 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:06:45 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,19 @@ int	check_builtins(char *cmd)
 
 void	ft_builtins_parent(t_shell *shell, char **cmd)
 {
-	if (ft_strncmp(cmd[0], "exit", 5) == 0)
+	if (!ft_strcmp(cmd[0], "exit"))
 		ft_exit(shell, cmd);
-	if (ft_strncmp(cmd[0], "cd", 3) == 0)
+	if (!ft_strcmp(cmd[0], "cd"))
 		ft_cd(shell, cmd);
-	if (ft_strncmp(cmd[0], "export", 7) == 0)
+	if (!ft_strcmp(cmd[0], "export"))
 		ft_export(shell, cmd);
-	if (ft_strncmp(cmd[0], "unset", 6) == 0)
+	if (!ft_strcmp(cmd[0], "unset"))
 		ft_unset(shell, cmd);
-	if (ft_strncmp(cmd[0], "echo", 5) == 0)
+	if (!ft_strcmp(cmd[0], "echo"))
 		ft_echo(cmd);
-	if (ft_strncmp(cmd[0], "pwd", 4) == 0)
+	if (!ft_strcmp(cmd[0], "pwd"))
 		ft_pwd();
-	if (ft_strncmp(cmd[0], "env", 4) == 0)
+	if (!ft_strcmp(cmd[0], "env"))
 		ft_env(shell);
 }
 
