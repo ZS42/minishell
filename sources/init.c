@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:12:09 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/24 17:37:37 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:12:30 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ int	count_pipes(t_list_cmd *cmd)
 		return (0);
 	pipe = 0;
 	cmd = cmd->next;
-	while (cmd)
-	{
-		pipe++;
+	while (cmd && ++pipe)
 		cmd = cmd->next;
-	}
 	return (pipe);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilities.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:29:12 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/23 17:32:22 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:16:36 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_free_2d(char **s)
 {
 	int	i;
 
+	if (!s)
+		return ;
 	i = -1;
 	while (s[++i])
 		free(s[i]);

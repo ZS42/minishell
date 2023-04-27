@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 14:25:13 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/23 13:59:09 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:16:53 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,11 @@ char	*path(t_shell *shell, char *cmd)
 {
 	char	**paths;
 	char	*valid_path;
-	int		i;
 
 	paths = append_path(shell);
 	if (!paths)
 		exit(127);
 	valid_path = check_path(cmd, paths);
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
-	free(paths);
+	ft_free_2d(paths);
 	return (valid_path);
 }
