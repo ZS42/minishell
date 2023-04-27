@@ -6,21 +6,11 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 17:40:10 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 17:05:03 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:31:43 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	error_pipe(char **cmd, t_shell *shell)
-{
-	ft_putstr_fd("ruhan_zahra_shell: ", 2);
-	ft_putstr_fd(cmd[0], 2);
-	ft_putstr_fd(": command not found\n", 2);
-	g_exit_status = 127;
-	free_shell(shell);
-	exit (127);
-}
 
 void	ft_wait(int *pid, int nbr_pipes)
 {
@@ -36,6 +26,22 @@ void	ft_wait(int *pid, int nbr_pipes)
 			g_exit_status = WEXITSTATUS(p);
 		i++;
 	}
+}
+
+int	**open_pipes(t_shell *shell)
+{
+	int	i;
+
+	i = 0;
+	shell->fd = (int **)ft_calloc(shell->nbr_pipes, sizeof(int *));
+	while (i < shell->nbr_pipes)
+		shell->fd[i++] = (int *)ft_calloc(2, sizeof(int));
+	i = -1;
+	while (++i < shell->nbr_pipes)
+		if (pipe (shell->fd[i]) == -1 || shell->fd[i][0] == -1
+			|| shell->fd[i][1] == -1)
+			error(shell->fd[i], shell);
+	return (shell->fd);
 }
 
 void	close_fds(t_shell *shell)

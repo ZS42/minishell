@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:02:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 17:04:54 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:37:02 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,14 @@ void	ft_dupe_pipes(t_shell *shell, int i)
 	close_fds(shell);
 }
 
-int	**open_pipes(t_shell *shell)
+void	error_pipe(char **cmd, t_shell *shell)
 {
-	int	i;
-
-	i = 0;
-	shell->fd = (int **)ft_calloc(shell->nbr_pipes, sizeof(int *));
-	while (i < shell->nbr_pipes)
-		shell->fd[i++] = (int *)ft_calloc(2, sizeof(int));
-	i = -1;
-	while (++i < shell->nbr_pipes)
-		if (pipe (shell->fd[i]) == -1 || shell->fd[i][0] == -1
-			|| shell->fd[i][1] == -1)
-			error(shell->fd[i], shell);
-	return (shell->fd);
-}
-
-void	ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid)
-{
-	pid[cmd_list->cmd_nbr] = fork();
-	if (pid[cmd_list->cmd_nbr] == -1)
-		error_pipe(cmd_list->cmd, shell);
-	if (pid[cmd_list->cmd_nbr] == 0)
-		child_process(shell, cmd_list);
-	else
-		signal(SIGINT, SIG_IGN);
+	ft_putstr_fd("ruhan_zahra_shell: ", 2);
+	ft_putstr_fd(cmd[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+	g_exit_status = 127;
+	free_shell(shell);
+	exit (127);
 }
 
 void	handle_error(t_list_cmd *cmd_list, t_shell *shell)
@@ -98,4 +81,15 @@ void	child_process(t_shell *shell, t_list_cmd *cmd_list)
 	}
 	free_shell(shell);
 	exit(g_exit_status);
+}
+
+void	ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid)
+{
+	pid[cmd_list->cmd_nbr] = fork();
+	if (pid[cmd_list->cmd_nbr] == -1)
+		error_pipe(cmd_list->cmd, shell);
+	if (pid[cmd_list->cmd_nbr] == 0)
+		child_process(shell, cmd_list);
+	else
+		signal(SIGINT, SIG_IGN);
 }

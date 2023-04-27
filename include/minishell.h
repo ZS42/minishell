@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 18:23:53 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:34:57 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,8 @@ void		ft_builtins_parent(t_shell *shell, char **cmd);
 int			check_builtins(char *cmd);
 
 char		*ft_find_var(char *env);
-void		ft_print_export(t_shell *shell);
+int			does_exist(t_shell *shell, char *var);
+int			check_valid(char *line);
 
 void		ft_cd(t_shell *shell, char **cmd);
 void		ft_echo(char **cmd);
@@ -153,30 +154,12 @@ void		ft_export(t_shell *shell, char **cmd);
 void		ft_pwd(void);
 void		ft_unset(t_shell *shell, char **cmd);
 
-
-int			does_exist(t_shell *shell, char *var);
-
-
-int			check_valid(char *line);
-
-
 char		*path(t_shell *shell, char *cmd);
 
-char		*ft_here_doc(t_shell *shell, char *delimiter, char *here_doc);
-char		*ft_expand_here_doc(t_shell *shell, char array[999998]);
-
 void		execute(t_shell *shell, t_list_cmd *cmd_list);
-int			**open_pipes(t_shell *shell);
 void		ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid);
-void		ft_dupe_pipes(t_shell *shell, int i);
-void		child_process(t_shell *shell, t_list_cmd *cmd_list);
 void		exec_rdr(t_shell *shell, t_list_rdr *ptr);
-void		exec_in(t_list_rdr *rdr, t_shell *shell);
-void		exec_out(t_list_rdr *rdr, t_shell *shell);
-void		exec_here_doc(t_list_rdr *rdr, t_shell *shell);
-void		error_pipe(char **cmd, t_shell *shell);
 void		close_fds(t_shell *shell);
-void		ft_wait(int *pid, int nbr_pipes);
 
 void		handle_sig_child(int sig);
 void		handle_sig(int sig);

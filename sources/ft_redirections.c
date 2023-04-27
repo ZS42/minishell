@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirections.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:19:27 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/26 18:07:34 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:29:32 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,33 @@ void	exec_out(t_list_rdr *rdr, t_shell *shell)
 			perm_error(1, shell);
 	}
 	dup2(rdr->fd_out, STDOUT_FILENO);
+}
+
+char	*ft_here_doc(t_shell *shell, char *delimiter, char *herestring)
+{
+	char	*temp;
+	int		i;
+	int		fd;
+
+	temp = "";
+	delimiter = ft_strjoin_ft(delimiter, "\n");
+	fd = dup(STDIN_FILENO);
+	while (1)
+	{
+		write (1, "> ", 2);
+		herestring = get_next_line(fd);
+		if (ft_strncmp(herestring, delimiter, ft_strlen(delimiter) + 1) == 0)
+			break ;
+		temp = ft_strjoin_ft(temp, herestring);
+		free(herestring);
+	}
+	herestring = temp;
+	i = -1;
+	while (herestring[++i])
+		if (herestring[i] == '$' && lenofenv(&herestring[i]) > 1)
+			handle_env(shell, &herestring, i--);
+	close(fd);
+	return (herestring);
 }
 
 void	exec_here_doc(t_list_rdr *rdr, t_shell *shell)
