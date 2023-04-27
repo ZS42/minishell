@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:24:02 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 11:13:47 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/27 16:59:44 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	fits_in_long_long(char *str)
 
 	if (ft_strlen(str) > 20)
 		return (0);
-	if (ft_strncmp(str, "-9223372036854775808", 21) == 0)
+	if (!ft_strncmp(str, "-9223372036854775808", 21))
 		return (1);
 	out = 0;
 	if (*str == '-' || *str == '+')
@@ -99,25 +99,25 @@ void	ft_not_num_error(char *cmd)
 	g_exit_status = 255;
 }
 
-void	ft_exit(t_shell *shell, t_list_cmd *l)
+void	ft_exit(t_shell *shell, char **cmd)
 {
 	ft_putstr_fd("exit\n", 1);
 	g_exit_status = 0;
-	if (l->cmd[1] && l->cmd[2])
+	if (cmd[1] && cmd[2])
 	{
 		ft_putstr_fd("ruhan_zahra_shell: exit: too many arguments\n", 2);
 		g_exit_status = 1;
 		return ;
 	}
-	else if (l->cmd[1] && (ft_check_numeric(l->cmd[1])
-			|| !fits_in_long_long(l->cmd[1])))
-		ft_not_num_error(l->cmd[1]);
-	else if (l->cmd[1])
+	else if (cmd[1] && (ft_check_numeric(cmd[1])
+			|| !fits_in_long_long(cmd[1])))
+		ft_not_num_error(cmd[1]);
+	else if (cmd[1])
 	{
-		if (ft_atoi_exit(l->cmd[1]) == -1)
+		if (ft_atoi_exit(cmd[1]) == -1)
 			g_exit_status = 1;
 		else
-			g_exit_status = ft_atoi_exit(l->cmd[1]);
+			g_exit_status = ft_atoi_exit(cmd[1]);
 	}
 	free_shell(shell);
 	exit(g_exit_status);

@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 17:40:10 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/26 19:08:07 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:05:03 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ex_loop(t_shell *shell, t_list_cmd *ptr)
 			ptr->cmd_nbr = i;
 			if (check_builtins(ptr->cmd[0]) && !shell->nbr_pipes
 				&& !ptr->rdr && !ptr->next)
-				ft_builtins_parent(shell, ptr);
+				ft_builtins_parent(shell, ptr->cmd);
 			else if (ptr->cmd != NULL)
 				ft_fork(shell, ptr, shell->pid);
 		}

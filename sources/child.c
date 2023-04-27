@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:02:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 15:49:59 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:04:54 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	child_process(t_shell *shell, t_list_cmd *cmd_list)
 		ft_dupe_pipes(shell, cmd_list->cmd_nbr);
 	exec_rdr(shell, cmd_list->rdr);
 	g_exit_status = 0;
-	if (check_builtins(cmd_list->cmd[0]) == 1)
-		ft_builtins_child(shell, cmd_list);
+	if (check_builtins(cmd_list->cmd[0]))
+		ft_builtins_child(shell, cmd_list->cmd);
 	else if (cmd_list->path != NULL && cmd_list->cmd != NULL)
 	{
 		if (execve(cmd_list->path, cmd_list->cmd, shell->env) == -1)

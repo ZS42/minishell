@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/26 18:31:07 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:05:29 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,11 @@ void		ft_shlvl(t_shell *shell, int add);
 t_list_cmd	**init_cmd_list(t_elem	*head, t_shell *shell, char *s);
 int			count_pipes(t_list_cmd *cmd);
 
-void		ft_builtins_child(t_shell *shell, t_list_cmd *cmd_list);
-void		ft_builtins_parent(t_shell *shell, t_list_cmd *cmd_list);
+void		ft_builtins_child(t_shell *shell, char **cmd);
+void		ft_builtins_parent(t_shell *shell, char **cmd);
 int			check_builtins(char *cmd);
 
-void		ft_exit(t_shell *shell, t_list_cmd *l);
+void		ft_exit(t_shell *shell, char **cmd);
 
 void		ft_cd(t_shell *shell, char **cmd);
 
