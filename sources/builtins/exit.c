@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:24:02 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/26 19:34:18 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 11:13:47 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,15 @@ int	ft_check_numeric(char *cmd)
 	return (0);
 }
 
+void	ft_not_num_error(char *cmd)
+{
+	ft_putstr_fd("reach", 2);
+	ft_putstr_fd("ruhan_zahra_shell: exit: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
+	g_exit_status = 255;
+}
+
 void	ft_exit(t_shell *shell, t_list_cmd *l)
 {
 	ft_putstr_fd("exit\n", 1);
@@ -100,14 +109,9 @@ void	ft_exit(t_shell *shell, t_list_cmd *l)
 		g_exit_status = 1;
 		return ;
 	}
-	else if (l->cmd[1] && (ft_check_numeric(l->cmd[1]) || !fits_in_long_long(l->cmd[1])))
-	{
-		ft_putstr_fd("reach", 2);
-		ft_putstr_fd("ruhan_zahra_shell: exit: ", 2);
-		ft_putstr_fd(l->cmd[1], 2);
-		ft_putstr_fd(": numeric argument required\n", 2);
-		g_exit_status = 255;
-	}
+	else if (l->cmd[1] && (ft_check_numeric(l->cmd[1])
+			|| !fits_in_long_long(l->cmd[1])))
+		ft_not_num_error(l->cmd[1]);
 	else if (l->cmd[1])
 	{
 		if (ft_atoi_exit(l->cmd[1]) == -1)

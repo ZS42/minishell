@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:05:05 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/26 19:09:52 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 15:31:01 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	free_rdr(t_list_rdr *rdr)
 {
 	if (!rdr)
 		return ;
-	if (rdr->fd_in != 0)
+	if (rdr->fd_in >= 0)
 		close(rdr->fd_in);
-	if (rdr->fd_out != 1)
-		close(rdr->fd_in);
+	if (rdr->fd_out >= 0)
+		close(rdr->fd_out);
 	if (rdr->file)
 		free(rdr->file);
 	if (rdr->next)

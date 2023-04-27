@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:02:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/26 19:17:47 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 15:49:59 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	handle_error(t_list_cmd *cmd_list, t_shell *shell)
 	}
 	else
 		nosuch_error(cmd_list->cmd[0], 1, shell);
+	exit (g_exit_status);
 }
 
 void	child_process(t_shell *shell, t_list_cmd *cmd_list)
