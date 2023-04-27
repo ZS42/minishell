@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:56:14 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/24 11:11:01 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:32:05 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 int	ft_isalnum(int c)
 {
-	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-	{
+	if (c >= 'A' && c <= 'Z')
 		return (1);
-	}
-	else
-	{
-		return (0);
-	}
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

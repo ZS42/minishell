@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 17:25:31 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:35:47 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ typedef struct s_shell
 int	g_exit_status;
 
 // RUHAN FUNCTIONS
-int			ft_isalnum(int c);
 int			is_sep(t_elem *elem);
 char		*ft_null_strjoin(char *s1, char *s2);
 int			is_in(char *str, char c);
@@ -183,11 +182,6 @@ void		error_pipe(char **cmd, t_shell *shell);
 void		close_fds(t_shell *shell);
 void		ft_wait(int *pid, int nbr_pipes);
 
-void		print_list(t_list_cmd *cmd_list);
-void		ft_print2d(char **s);
-void		print_list_rdr(t_list_rdr *rdr_head);
-void		print_cmd(t_list_cmd *head);
-
 void		handle_sig_child(int sig);
 void		handle_sig(int sig);
 
@@ -196,6 +190,5 @@ void		ft_free_2d_int(int **s, int i);
 char		**ft_cpy_2d(char **s);
 void		sort_2d_array(char **s);
 int			error(int *fd, t_shell *shell);
-int			ft_putnbr(int n);
 
 #endif

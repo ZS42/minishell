@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:10:52 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/24 14:31:27 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:32:22 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,6 @@ int	is_sep(t_elem *elem)
 	if (elem == NULL || elem->type == '|')
 		return (1);
 	if (elem->type == '&' || elem->type == -4)
-		return (1);
-	return (0);
-}
-
-int	ft_isalnum(int c)
-{
-	if (c >= 'A' && c <= 'Z')
-		return (1);
-	if (c >= 'a' && c <= 'z')
-		return (1);
-	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }

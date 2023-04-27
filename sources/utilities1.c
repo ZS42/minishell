@@ -6,11 +6,15 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:31:38 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 17:20:19 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:35:51 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void		print_list(t_list_cmd *cmd_list);
+void		ft_print2d(char **s);
+void		print_list_rdr(t_list_rdr *rdr_head);
 
 void	print_list_rdr(t_list_rdr *r)
 {

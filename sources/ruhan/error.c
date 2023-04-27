@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:16:27 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/27 17:25:41 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:30:00 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	nosuch_error1(char *str, int exitcode)
 {
 	ft_putstr_fd("ruhan_zahra_shell: ", 2);
 	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": No such file or directory", 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
 	g_exit_status = exitcode;
 	exit(g_exit_status);
 }
