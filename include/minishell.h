@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 17:05:29 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:25:31 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void		parse_line(t_shell *shell, char *line);
 int			syntax_error(t_elem *head, t_elem *elem);
 void		nosuch_error(char *str, int exitcode, t_shell *shell);
 void		nosuch_error1(char *str, int exitcode);
+void		error_exp(char *cmd, char *iden);
 void		perm_error(int exit_code, t_shell *shell);
 
 void		free_elem(t_elem *head);
@@ -193,7 +194,6 @@ void		handle_sig(int sig);
 void		ft_free_2d(char **s);
 void		ft_free_2d_int(int **s, int i);
 char		**ft_cpy_2d(char **s);
-char		**remove_from2d(char **cmd, int i);
 void		sort_2d_array(char **s);
 int			error(int *fd, t_shell *shell);
 int			ft_putnbr(int n);

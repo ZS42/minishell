@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 17:15:13 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/25 17:23:41 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:24:54 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ void	env_update(t_shell *shell, char *line)
 
 	if (!check_valid(line))
 	{
-		ft_putstr_fd("ruhan_zahra_shell: export: `", 2);
-		ft_putstr_fd(line, 2);
-		ft_putstr_fd("': not a valid identifier\n", 2);
-		g_exit_status = 1;
+		error_exp("export", line);
 		return ;
 	}
 	var = ft_find_var(line);

@@ -3,54 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utilities1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 13:31:38 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/26 17:59:41 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:20:19 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	ft_swap(char **a, char **b)
-{
-	char	*temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-// sorts according to ascii so lowercase comes after all uppercase
-	// problem here 44. conflict with unset
-
-void	sort_2d_array(char **strs)
-{
-	int	len;
-	int	i;
-	int	j;
-
-	len = 0;
-	while (strs[len])
-		len++;
-	i = -1;
-	while (++i < len - 1)
-	{
-		j = i;
-		while (++j < len)
-			if (ft_strcmp(strs[i], strs[j]) > 0)
-				ft_swap(&strs[i], &strs[j]);
-	}
-}
-
-int	error(int *fd, t_shell *shell)
-{
-	close (fd[0]);
-	close (fd[1]);
-	printf("ERROR: %s\n", strerror(errno));
-	free(shell);
-	exit (0);
-}
 
 void	print_list_rdr(t_list_rdr *r)
 {
@@ -61,5 +21,38 @@ void	print_list_rdr(t_list_rdr *r)
 	{
 		printf("type %d\n file %s\n", r->type, r->file);
 		r = r->next;
+	}
+}
+
+void	ft_print2d(char **s)
+{
+	int		i;
+	int		len;
+
+	if (!s)
+		return ;
+	len = 0;
+	i = 0;
+	while (s[len])
+		len++;
+	while (i < len)
+	{
+		printf("%s\n", s[i]);
+		i++;
+	}
+}
+
+void	print_list(t_list_cmd *cmd_list)
+{
+	t_list_cmd	*ptr;
+
+	if (!cmd_list)
+		return ;
+	ptr = cmd_list;
+	while (ptr != NULL)
+	{
+		ft_print2d(ptr->cmd);
+		print_list_rdr(ptr->rdr);
+		ptr = ptr->next;
 	}
 }

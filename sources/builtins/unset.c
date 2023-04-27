@@ -6,19 +6,11 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:44:27 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/26 19:12:46 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:25:38 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	error_unset(char *cmd)
-{
-	ft_putstr_fd("ruhan_zahra_shell: unset: `", 2);
-	ft_putstr_fd(cmd, 2);
-	ft_putstr_fd("': not a valid identifier\n", 2);
-	g_exit_status = 1;
-}
 
 int	check_valid(char *line)
 {
@@ -41,6 +33,30 @@ int	check_valid(char *line)
 	return (1);
 }
 
+char	**remove_from2d(char **s, int i)
+{
+	int		len;
+	char	**new;
+
+	len = 0;
+	if (!s)
+		return (NULL);
+	while (s[len])
+		len++;
+	if (i >= len || i < 0)
+		return (ft_cpy_2d(s));
+	new = ft_calloc(len, sizeof(char *));
+	if (!new)
+		return (NULL);
+	len = -1;
+	while (s[++len] && len < i)
+		new[len] = ft_strdup_ft(s[len]);
+	while (s[++len])
+		new[len - 1] = ft_strdup_ft(s[len]);
+	new[len - 1] = NULL;
+	return (new);
+}
+
 void	unset_update(t_shell *shell, char *line)
 {
 	int		i;
@@ -48,7 +64,7 @@ void	unset_update(t_shell *shell, char *line)
 
 	i = does_exist(shell, line);
 	if (!check_valid(line) || is_in(line, '='))
-		error_unset(line);
+		error_exp("unset", line);
 	else if (i != -1)
 	{
 		new = remove_from2d(shell->env, i);

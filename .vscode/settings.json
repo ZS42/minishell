@@ -7,6 +7,7 @@
 		"locale": "c",
 		"__errc": "c",
 		"__hash_table": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"minishell.h": "c"
 	}
 }
