@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 18:05:31 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/28 19:50:08 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,7 @@ void		convert(t_shell *shell, t_elem *head);
 void		parse_line(t_shell *shell, char *line);
 
 int			syntax_error(t_elem *head, t_elem *elem);
-void		nosuch_error(char *str, int exitcode, t_shell *shell, int check);
-void		nosuch_error1(char *str, int exitcode);
+void		nosuch_error(char *str, int exitcode, t_shell *shell, int flag);
 void		error_exp(char *cmd, char *iden);
 void		perm_error(int exit_code, t_shell *shell, int check);
 

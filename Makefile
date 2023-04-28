@@ -51,15 +51,12 @@ check:
 	cd ..
 
 clean:
-	$(RM) $(OBJ_DIR)
-	@echo "object files removed"
+	@$(RM) $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
-	@echo "object files and binary removed"
+	@$(RM) $(NAME)
 
 re:	fclean all
-	@echo "object files and binary removed and binary remade"
 
 # to remove all recipes that aren't files to avoid relinking
 .PHONY:		all clean fclean re

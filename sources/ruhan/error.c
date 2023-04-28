@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:16:27 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/28 18:08:35 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/28 19:54:21 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,16 @@ int	syntax_error(t_elem *head, t_elem *elem)
 	return (0);
 }
 
-void	nosuch_error(char *str, int exitcode, t_shell *shell, int check)
+void	nosuch_error(char *str, int exitcode, t_shell *shell, int flag)
 {
 	ft_putstr_fd("ruhan_zahra_shell: ", 2);
 	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": No such file or directory", 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
 	g_exit_status = exitcode;
-	free_shell(shell);
-	if (check == 2)
+	if (shell)
+		free_shell(shell);
+	if (flag)
 		exit(g_exit_status);
-}
-
-void	nosuch_error1(char *str, int exitcode)
-{
-	ft_putstr_fd("ruhan_zahra_shell: ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": No such file or directory", 2);
-	g_exit_status = exitcode;
-	exit(g_exit_status);
 }
 
 void	error_exp(char *cmd, char *iden)
@@ -58,6 +50,6 @@ void	perm_error(int exit_code, t_shell *shell, int check)
 	ft_putstr_fd(" Permission denied", 2);
 	g_exit_status = exit_code;
 	free_shell(shell);
-	if (check == 2)
+	if (check)
 		exit (g_exit_status);
 }

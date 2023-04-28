@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirections.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:19:27 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 17:59:08 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/28 19:54:06 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 void	exec_in(t_list_rdr *rdr, t_shell *shell, int check)
 {
 	if (access(rdr->file, F_OK | R_OK) == 0)
+	{
 		rdr->fd_in = open(rdr->file, O_RDONLY, 0777);
+		dup2(rdr->fd_in, STDIN_FILENO);
+	}
 	else if (errno == 13)
 		perm_error(13, shell, check);
 	else
 		nosuch_error(rdr->file, 1, shell, check);
-	dup2(rdr->fd_in, STDIN_FILENO);
 }
 
 void	exec_out(t_list_rdr *rdr, t_shell *shell, int check)
@@ -54,7 +56,10 @@ char	*ft_here_doc(t_shell *shell, char *delimiter)
 		ft_putstr("> ");
 		input = get_next_line(g_exit_status);
 		if (!input || !ft_strcmp(input, delimiter))
+		{
+			ft_putstr("  \b\b");
 			break ;
+		}
 		herestring = ft_free_strjoin(herestring, input);
 	}
 	if (g_exit_status != -1)

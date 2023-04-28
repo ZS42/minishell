@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:24:02 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 16:59:44 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/28 18:39:53 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ void	ft_not_num_error(char *cmd)
 
 void	ft_exit(t_shell *shell, char **cmd)
 {
-	ft_putstr_fd("exit\n", 1);
+	if (!(shell->cmd_list[0] && shell->cmd_list[0]->next))
+		ft_putstr("exit\n");
 	g_exit_status = 0;
 	if (cmd[1] && cmd[2])
 	{
