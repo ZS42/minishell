@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:02:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 19:53:03 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/28 18:07:21 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	handle_error(t_list_cmd *cmd_list, t_shell *shell)
 	if (access(cmd_list->cmd[0], X_OK) == -1)
 	{
 		if (access(cmd_list->cmd[0], F_OK) == -1)
-			nosuch_error(cmd_list->cmd[0], 127, shell);
+			nosuch_error(cmd_list->cmd[0], 127, shell, 2);
 		else
-			perm_error(126, shell);
+			perm_error(126, shell, 2);
 	}
 	else if (S_ISDIR(info.st_mode))
 	{
@@ -53,17 +53,20 @@ void	handle_error(t_list_cmd *cmd_list, t_shell *shell)
 		g_exit_status = 126;
 	}
 	else
-		nosuch_error(cmd_list->cmd[0], 1, shell);
+		nosuch_error(cmd_list->cmd[0], 1, shell, 2);
 	exit (g_exit_status);
 }
 
 void	child_process(t_shell *shell, t_list_cmd *cmd_list)
 {
-	signal(SIGINT, handle_sig_child);
-	signal(SIGQUIT, handle_sig_child);
+	int	check;
+
+	check = 2;
 	if (shell->nbr_pipes > 0)
 		ft_dupe_pipes(shell, cmd_list->cmd_nbr);
-	exec_rdr(shell, cmd_list->rdr);
+	exec_rdr(shell, cmd_list->rdr, check);
+	signal(SIGINT, handle_sig_child);
+	signal(SIGQUIT, handle_sig_child);
 	g_exit_status = 0;
 	if (check_builtins(cmd_list->cmd[0]))
 		ft_builtins_child(shell, cmd_list->cmd);

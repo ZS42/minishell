@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 20:44:52 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/28 18:05:31 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,10 @@ void		convert(t_shell *shell, t_elem *head);
 void		parse_line(t_shell *shell, char *line);
 
 int			syntax_error(t_elem *head, t_elem *elem);
-void		nosuch_error(char *str, int exitcode, t_shell *shell);
+void		nosuch_error(char *str, int exitcode, t_shell *shell, int check);
 void		nosuch_error1(char *str, int exitcode);
 void		error_exp(char *cmd, char *iden);
-void		perm_error(int exit_code, t_shell *shell);
+void		perm_error(int exit_code, t_shell *shell, int check);
 
 void		free_elem(t_elem *head);
 void		free_rdr(t_list_rdr *rdr);
@@ -152,11 +152,12 @@ char		*path(t_shell *shell, char *cmd);
 
 void		execute(t_shell *shell, t_list_cmd *cmd_list);
 void		ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid);
-void		exec_rdr(t_shell *shell, t_list_rdr *ptr);
+void		exec_rdr(t_shell *shell, t_list_rdr *ptr,int check);
 void		close_fds(t_shell *shell);
 
 void		handle_sig_child(int sig);
 void		handle_sig(int sig);
+void		handle_sig_hd(int sig);
 
 void		ft_free_2d(char **s);
 void		ft_free_2d_int(int **s, int i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:02:04 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 20:44:56 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/28 18:22:54 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	call_tilde(t_shell *shell, char *cmd)
 	char	*join;
 
 	str = ft_getenv(shell, "HOME");
+		ft_putstr_fd("ruhan_zahra_shell: cd: HOME not set\n", 2);
 	join = ft_strjoin(str, &cmd[1]);
 	free(str);
 	if (chdir(join) != 0)
@@ -77,6 +78,8 @@ void	ft_cd(t_shell *shell, char **cmd)
 	if (!cmd[1])
 	{
 		temp = ft_getenv(shell, "HOME");
+		if (temp == NULL)
+
 		chdir(temp);
 		free(temp);
 	}

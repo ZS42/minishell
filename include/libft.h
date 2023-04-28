@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 20:34:17 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/27 20:51:13 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/28 16:10:58 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdint.h>
 
 int		ft_isdigit(int c);
 int		ft_is_alpha(int c);

@@ -6,7 +6,7 @@
 /*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 11:59:38 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/25 14:06:38 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/28 17:18:12 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@
 		// ft_putstr_fd("\e[34mruhan_zahra_shell\e[0m ", 2);
 // in parent have to disable SIGINT and put it back after waiting so
 // that SIGINT doesnt work on bot parent and child together
+void	handle_sig_hd(int sig)
+{
+	if (sig == SIGINT)
+	{
+		close(g_exit_status);
+		g_exit_status = -1;
+	}
+}
 
 void	handle_sig(int sig)
 {
@@ -52,9 +60,9 @@ void	handle_sig(int sig)
 
 void	handle_sig_child(int sig)
 {
+	ft_putstr_fd("\e[34mruhan_zahra_shell\e[0m   \b\b", 2);
 	if (sig == SIGINT)
 		g_exit_status = 130;
 	if (sig == SIGQUIT)
 		g_exit_status = 131;
-	exit(g_exit_status);
 }

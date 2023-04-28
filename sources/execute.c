@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 17:40:10 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/27 18:31:43 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/28 18:06:11 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ void	close_fds(t_shell *shell)
 
 void	ex_loop(t_shell *shell, t_list_cmd *ptr)
 {
-	int	i;
+	int		i;
+	int	check;
 
+	check = 1;
 	i = 0;
 	while (ptr)
 	{
@@ -75,8 +77,8 @@ void	ex_loop(t_shell *shell, t_list_cmd *ptr)
 			else if (ptr->cmd != NULL)
 				ft_fork(shell, ptr, shell->pid);
 		}
-		else if (ptr->rdr)
-			exec_rdr(shell, ptr->rdr);
+		else if (ptr->cmd == NULL)
+			exec_rdr(shell, ptr->rdr, check);
 		ptr = ptr->next;
 		i++;
 	}
