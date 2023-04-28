@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 17:40:10 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 19:56:36 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/28 20:58:05 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,31 @@ void	close_fds(t_shell *shell)
 	}
 }
 
+// void	ex_loop(t_shell *shell, t_list_cmd *ptr)
+// {
+// 	int		i;
+
+// 	i = 0;
+// 	while (ptr)
+// 	{
+// 		if (ptr->cmd && !ft_strcmp(ptr->cmd[0], "./minishell"))
+// 			ft_shlvl(shell, 1);
+// 		if (ptr->cmd)
+// 		{
+// 			ptr->cmd_nbr = i;
+// 			if (check_builtins(ptr->cmd[0]) && !shell->nbr_pipes
+// 				&& !ptr->rdr && !ptr->next)
+// 				ft_builtins_parent(shell, ptr->cmd);
+// 			else if (ptr->cmd != NULL)
+// 				ft_fork(shell, ptr, shell->pid);
+// 		}
+// 		else if (ptr->cmd == NULL)
+// 			exec_rdr(shell, ptr->rdr, 0);
+// 		ptr = ptr->next;
+// 		i++;
+// 	}
+// }
+
 void	ex_loop(t_shell *shell, t_list_cmd *ptr)
 {
 	int		i;
@@ -64,21 +89,15 @@ void	ex_loop(t_shell *shell, t_list_cmd *ptr)
 	i = 0;
 	while (ptr)
 	{
+		ptr->cmd_nbr = i++;
 		if (ptr->cmd && !ft_strcmp(ptr->cmd[0], "./minishell"))
 			ft_shlvl(shell, 1);
-		if (ptr->cmd)
-		{
-			ptr->cmd_nbr = i;
-			if (check_builtins(ptr->cmd[0]) && !shell->nbr_pipes
-				&& !ptr->rdr && !ptr->next)
-				ft_builtins_parent(shell, ptr->cmd);
-			else if (ptr->cmd != NULL)
-				ft_fork(shell, ptr, shell->pid);
-		}
-		else if (ptr->cmd == NULL)
-			exec_rdr(shell, ptr->rdr, 0);
+		if (ptr->cmd && check_builtins(ptr->cmd[0]) && !shell->nbr_pipes
+			&& !ptr->rdr && !ptr->next)
+			ft_builtins_parent(shell, ptr->cmd);
+		else
+			ft_fork(shell, ptr, shell->pid);
 		ptr = ptr->next;
-		i++;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 13:58:15 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 16:54:49 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/28 20:16:44 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	ft_builtins_parent(t_shell *shell, char **cmd)
 		ft_env(shell);
 }
 
-void	ft_builtins_child(t_shell *shell, char **cmd)
+void	ft_builtins_child(t_shell *shell, t_list_cmd *cmd)
 {
-	ft_builtins_parent(shell, cmd);
+	ft_builtins_parent(shell, cmd->cmd);
 	free_shell(shell);
 	exit (g_exit_status);
 }

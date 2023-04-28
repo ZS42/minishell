@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:19:27 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 19:54:06 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/28 20:50:10 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	exec_here_doc(t_list_rdr *rdr, t_shell *shell, int check)
 	if ((rdr->next && rdr->next->type != RDR_HEREDOC
 			&& rdr->next->type != RDR_IN) || !rdr->next)
 		dup2(rdr->fd_in, 0);
-	ft_putstr_fd(herestring, rdr->fd_in);
+	if (check)
+		ft_putstr_fd(herestring, rdr->fd_in);
 	free(herestring);
 	close(rdr->fd_in);
 	if (!rdr->next || rdr->next->type != RDR_HEREDOC)

@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:02:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 19:59:35 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/28 20:32:09 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	child_process(t_shell *shell, t_list_cmd *cmd_list)
 	signal(SIGQUIT, handle_sig_child);
 	g_exit_status = 0;
 	if (check_builtins(cmd_list->cmd[0]))
-		ft_builtins_child(shell, cmd_list->cmd);
+		ft_builtins_child(shell, cmd_list);
 	else if (cmd_list->path != NULL && cmd_list->cmd != NULL)
 	{
 		if (execve(cmd_list->path, cmd_list->cmd, shell->env) == -1)
@@ -91,5 +91,8 @@ void	ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid)
 	if (pid[cmd_list->cmd_nbr] == 0)
 		child_process(shell, cmd_list);
 	else
+	{
 		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
 }

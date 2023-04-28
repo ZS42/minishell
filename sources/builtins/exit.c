@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:24:02 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 18:39:53 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/28 20:47:49 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	ft_check_numeric(char *cmd)
 
 void	ft_not_num_error(char *cmd)
 {
-	ft_putstr_fd("reach", 2);
 	ft_putstr_fd("ruhan_zahra_shell: exit: ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 11:59:38 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 17:18:12 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/28 20:58:26 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,15 @@ void	handle_sig(int sig)
 
 void	handle_sig_child(int sig)
 {
-	ft_putstr_fd("\e[34mruhan_zahra_shell\e[0m   \b\b", 2);
 	if (sig == SIGINT)
+	{
+		ft_putstr_fd("\n\e[34mruhan_zahra_shell\e[0m   \b\b", 2);
 		g_exit_status = 130;
+		return ;
+	}
 	if (sig == SIGQUIT)
+	{
+		ft_putstr_fd("Quit: 3\n", 2);
 		g_exit_status = 131;
+	}
 }
