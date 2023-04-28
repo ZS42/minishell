@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:56:06 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/27 20:47:36 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/28 21:52:50 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_list_cmd	*make_cmd(t_shell *shell, t_elem *head, t_list_cmd *prev)
 	cmd = malloc(sizeof(t_list_cmd));
 	cmd->rdr = get_rdr(head, NULL);
 	cmd->cmd = parse_elem(head);
-	if (head->content[0] == '.')
+	if (head->content[0] == '.' && head->content[1] == '/')
 	{
 		temp = ft_getenv(shell, "PWD");
 		cmd->path = ft_null_strjoin(temp, &head->content[1]);
