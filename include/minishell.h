@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/29 15:21:01 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/29 17:34:46 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,6 @@ void		close_fds(t_shell *shell);
 void		handle_nl(int sig);
 void		handle_quit(int sig);
 void		handle_prompt(int sig);
-void		handle_ignore(int sig);
 void		handle_sig_hd(int sig);
 
 void		ft_free_2d(char **s);
