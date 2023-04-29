@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:02:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/29 18:58:13 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/29 19:18:19 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,9 @@ void	child_process(t_shell *shell, t_list_cmd *cmd_list)
 	if (shell->nbr_pipes > 0)
 		ft_dupe_pipes(shell, cmd_list->cmd_nbr);
 	exec_rdr(shell, cmd_list->rdr, 1);
-	if (!cmd_list->cmd);
-	else if (check_builtins(cmd_list->cmd[0]))
+	if (cmd_list->cmd && check_builtins(cmd_list->cmd[0]))
 		ft_builtins_child(shell, cmd_list);
-	else if (cmd_list->path != NULL && cmd_list->cmd != NULL)
+	else if (cmd_list->path && cmd_list->cmd)
 	{
 		if (execve(cmd_list->path, cmd_list->cmd, shell->env) == -1)
 			handle_error(cmd_list, shell);

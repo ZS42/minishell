@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:52:29 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/29 18:54:05 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/29 19:22:32 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	parse_line(t_shell *shell, char *line)
 		return ;
 	}
 	convert(shell, head);
-	if (!shell->cmd_list)
+	if (!shell->cmd_list && line[0] != '$')
 	{
 		ft_putstr_fd("ruhan_zahra_shell: : command not found\n", 2);
 		g_exit_status = 127;
