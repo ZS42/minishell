@@ -11,7 +11,7 @@ READLINE_I = /usr/local/Cellar/readline/8.1/include
 SRCS = main.c init.c execute.c child.c signals.c ft_redirections.c \
 		builtins/env.c builtins/cd.c builtins/exit.c builtins/echo.c \
 		builtins/pwd.c builtins/export.c path.c builtins/unset.c \
-		builtins/builtins.c utilities.c \
+		builtins/builtins.c utilities.c heredoc.c \
 		ruhan/convert.c ruhan/elem_tools.c ruhan/env.c ruhan/free.c ruhan/error.c \
 		ruhan/func.c ruhan/lex.c ruhan/parse.c ruhan/redir.c ruhan/update.c \
 		libft/ft_split.c libft/get_next_line_utils.c libft/get_next_line.c \
