@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 17:40:10 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 20:58:05 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/29 15:23:42 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,12 @@ void	execute(t_shell *shell, t_list_cmd *ptr)
 	shell->pid = (int *)ft_calloc(shell->nbr_pipes + 1, sizeof(int));
 	if (shell->nbr_pipes > 0)
 		shell->fd = open_pipes(shell);
+	signal(SIGQUIT, handle_quit);
+	signal(SIGINT, handle_nl);
 	ex_loop(shell, ptr);
 	close_fds(shell);
 	ft_wait(shell->pid, shell->nbr_pipes);
-	signal(SIGINT, handle_sig);
+	// signal(SIGINT, handle_prompt);
 	clean_shell(shell);
 	unlink("here_doc");
 }

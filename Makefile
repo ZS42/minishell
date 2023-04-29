@@ -33,7 +33,7 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 all:	$(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -L $(LIB_READLINE) $(OBJS) -lreadline -o $(NAME)
+	@$(CC) $(CFLAGS) -I $(READLINE_I) -L $(LIB_READLINE) $(OBJS) -lreadline -o $(NAME)
 	@printf "\x1B[32mminishell ready\\x1B[32m\n";
 
 gpush:

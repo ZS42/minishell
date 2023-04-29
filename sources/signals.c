@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 11:59:38 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 21:33:04 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/29 15:45:22 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,34 @@ void	handle_sig_hd(int sig)
 	}
 }
 
-void	handle_sig(int sig)
+void	handle_ignore(int sig)
 {
-	ft_putstr_fd("\e[34mruhan_zahra_shell\e[0m   \b\b", 2);
-	if (sig == SIGQUIT)
-		return ;
-	ft_putstr_fd("\n\e[34mruhan_zahra_shell\e[0m ", 2);
+	(void)sig;
+}
+
+void	handle_prompt(int sig)
+{
+	(void)sig;
+	rl_on_new_line();
+	rl_redisplay();
+	ft_putstr("  \b\b\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 	g_exit_status = 1;
 }
 
-void	handle_sig_child(int sig)
+void	handle_nl(int sig)
 {
-	if (sig == SIGINT)
-	{
-		ft_putstr_fd("\n\e[34mruhan_zahra_shell\e[0m   \b\b", 2);
-		g_exit_status = 130;
-		return ;
-	}
-	if (sig == SIGQUIT)
-	{
-		ft_putstr_fd("Quit: 3\n", 2);
-		g_exit_status = 131;
-	}
+	(void)sig;
+	ft_putstr("\n");
+	g_exit_status = 130;
+	return ;
+}
+
+void	handle_quit(int sig)
+{
+	(void)sig;
+	ft_putstr_fd("Quit: 3\n", 2);
+	g_exit_status = 131;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:02:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 21:32:59 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/29 15:25:59 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	child_process(t_shell *shell, t_list_cmd *cmd_list)
 	if (shell->nbr_pipes > 0)
 		ft_dupe_pipes(shell, cmd_list->cmd_nbr);
 	exec_rdr(shell, cmd_list->rdr, 1);
-	// signal(SIGINT, handle_sig_child);
-	// signal(SIGQUIT, handle_sig_child);
 	g_exit_status = 0;
 	if (check_builtins(cmd_list->cmd[0]))
 		ft_builtins_child(shell, cmd_list);
@@ -92,7 +90,7 @@ void	ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid)
 		child_process(shell, cmd_list);
 	else
 	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
+		// signal(SIGINT, SIG_IGN);
+		// signal(SIGQUIT, SIG_IGN);
 	}
 }

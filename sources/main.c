@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:23:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 20:46:31 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/29 15:28:13 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	main(int ac, char**av, char **envp)
 
 	if (ac != 1 || av[1])
 		nosuch_error(av[1], 127, NULL, 1);
-	signal(SIGINT, handle_sig);
-	signal(SIGQUIT, handle_sig);
+	signal(SIGINT, handle_prompt);
+	signal(SIGQUIT, handle_ignore);
 	s = "1";
 	shell = init_shell(envp);
 	while (s != NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:19:07 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 20:57:41 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/29 15:21:01 by zsyyida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # include <readline/readline.h>
 # include <readline/history.h>
+#include <sys/ioctl.h>
 
 # include <limits.h>
 # include <errno.h>
@@ -83,6 +84,7 @@ typedef struct s_shell
 
 int	g_exit_status;
 
+void		rl_replace_line(const char *text, int clear_undo);
 // RUHAN FUNCTIONS
 int			is_sep(t_elem *elem);
 char		*ft_null_strjoin(char *s1, char *s2);
@@ -154,8 +156,11 @@ void		ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid);
 void		exec_rdr(t_shell *shell, t_list_rdr *ptr, int check);
 void		close_fds(t_shell *shell);
 
-void		handle_sig_child(int sig);
-void		handle_sig(int sig);
+// void		handle_sig_child(int sig);
+void		handle_nl(int sig);
+void		handle_quit(int sig);
+void		handle_prompt(int sig);
+void		handle_ignore(int sig);
 void		handle_sig_hd(int sig);
 
 void		ft_free_2d(char **s);
