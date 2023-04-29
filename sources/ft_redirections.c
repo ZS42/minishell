@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:19:27 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/29 17:46:13 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/29 18:45:25 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	exec_in(t_list_rdr *rdr, t_shell *shell, int check)
 	{
 		rdr->fd_in = open(rdr->file, O_RDONLY, 0777);
 		dup2(rdr->fd_in, STDIN_FILENO);
+		close(rdr->fd_in);
 	}
 	else if (errno == 13)
 		perm_error(13, shell, check);
@@ -37,6 +38,7 @@ void	exec_out(t_list_rdr *rdr, t_shell *shell, int check)
 	else
 		perm_error(1, shell, check);
 	dup2(rdr->fd_out, STDOUT_FILENO);
+	close(rdr->fd_out);
 }
 
 // for < RDR_IN

@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:46:05 by mgoltay           #+#    #+#             */
-/*   Updated: 2023/04/29 17:49:17 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/29 18:43:52 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	hd_loop(char **herestring, char *delimiter)
 		}
 		*herestring = ft_free_strjoin(*herestring, input);
 	}
-	free(input);
+	if (input)
+		free(input);
 }
 
 char	*ft_here_doc(t_shell *shell, char *delimiter)
