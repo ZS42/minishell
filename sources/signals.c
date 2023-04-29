@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 11:59:38 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/29 15:45:22 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/29 16:33:55 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,45 +25,36 @@
 // Change what's displayed on the screen to reflect the current contents
 // of rl_line_buffer.
 
-// SIGINT = 4
-// SIGINT  ctrl + C
-
-// SIGQUIT = 3?
-// SIGQUIT ctrl + '\'
-
-// ctrl + D is not signal but EOF
-// should be handled where readline . Makes content of readline null
-
-		// ft_putstr_fd("\e[34mruhan_zahra_shell\e[0m   \b\b", 2);
-		// if (sig == 3)
-		// 	return ;
-		// ft_putstr_fd("\e[34mruhan_zahra_shell\e[0m ", 2);
-// in parent have to disable SIGINT and put it back after waiting so
-// that SIGINT doesnt work on bot parent and child together
 void	handle_sig_hd(int sig)
 {
 	if (sig == SIGINT)
 	{
-		close(g_exit_status);
+		if (g_exit_status != -1)
+			close(g_exit_status);
 		g_exit_status = -1;
 	}
 }
 
 void	handle_ignore(int sig)
 {
-	(void)sig;
+	(void) sig;
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	ft_putstr("  \b\b");
+	rl_replace_line("", 0);
 }
 
 void	handle_prompt(int sig)
 {
-	(void)sig;
 	rl_on_new_line();
 	rl_redisplay();
 	ft_putstr("  \b\b\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-	g_exit_status = 1;
+	if (sig == SIGINT)
+		g_exit_status = 1;
 }
 
 void	handle_nl(int sig)

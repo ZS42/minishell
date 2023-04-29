@@ -11,6 +11,7 @@
 		"minishell.h": "c",
 		"limits.h": "c",
 		"readline.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"cstring": "c"
 	}
 }

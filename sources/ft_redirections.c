@@ -6,7 +6,7 @@
 /*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:19:27 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/28 20:50:10 by mgoltay          ###   ########.fr       */
+/*   Updated: 2023/04/29 16:31:19 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_here_doc(t_shell *shell, char *delimiter)
 	while (1)
 	{
 		signal(SIGINT, handle_sig_hd);
-		signal(SIGQUIT, handle_sig_hd);
+		signal(SIGQUIT, handle_ignore);
 		ft_putstr("> ");
 		input = get_next_line(g_exit_status);
 		if (!input || !ft_strcmp(input, delimiter))

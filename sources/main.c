@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:23:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/29 15:28:13 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/29 15:57:29 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	main(int ac, char**av, char **envp)
 
 	if (ac != 1 || av[1])
 		nosuch_error(av[1], 127, NULL, 1);
-	signal(SIGINT, handle_prompt);
-	signal(SIGQUIT, handle_ignore);
 	s = "1";
 	shell = init_shell(envp);
 	while (s != NULL)
 	{
+		signal(SIGINT, handle_prompt);
+		signal(SIGQUIT, handle_ignore);
 		s = readline("\e[34mruhan_zahra_shell\e[0m ");
 		if (!s)
 		{

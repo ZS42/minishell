@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsyyida <zsyyida@student42abudhabi.ae>     +#+  +:+       +#+        */
+/*   By: mgoltay <mgoltay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:02:46 by zsyyida           #+#    #+#             */
-/*   Updated: 2023/04/29 15:25:59 by zsyyida          ###   ########.fr       */
+/*   Updated: 2023/04/29 16:21:08 by mgoltay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,4 @@ void	ft_fork(t_shell *shell, t_list_cmd *cmd_list, int *pid)
 		error_pipe(cmd_list->cmd, shell);
 	if (pid[cmd_list->cmd_nbr] == 0)
 		child_process(shell, cmd_list);
-	else
-	{
-		// signal(SIGINT, SIG_IGN);
-		// signal(SIGQUIT, SIG_IGN);
-	}
 }
